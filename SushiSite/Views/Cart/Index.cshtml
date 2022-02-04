@@ -1,0 +1,31 @@
+﻿@model SushiSite.Models.ViewModel.CartListViewModel;
+
+<div class="card text-center">
+    <div class="card-header">
+        Вибрані продукти для замовлення
+    </div>
+    <div class="card-body">
+
+        <ul class="list-group mb-2" style="list-style-type: none;">
+            @if(Model.Foods.Any())
+            {
+                @foreach (var car in Model.Foods)
+                {
+                    <li class="list-group-item mb-3" style="background-color: #E5E7E9">@car.Title @car.Price гривень</li>
+                }
+            }
+            else
+            {
+                <li><h1>Ви не додали нічого до кошику.</h1></li>
+            }
+        </ul>
+        @if(Model.Foods.Any())
+        {
+            <a asp-controller="Order" asp-action="AddOrder" class="btn btn-primary">Підтвердити замовлення</a>
+            <a asp-controller="Cart" asp-action="ClearCart" class="btn btn-danger">Очистити кошик</a>
+        }
+    </div>
+    <div class="card-footer text-muted">
+        Кількість доданих продуктів: @Model.Foods.Count()
+    </div>
+</div>
